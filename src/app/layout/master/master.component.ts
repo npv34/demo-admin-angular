@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {AuthService} from "../../services/auth.service";
 
 @Component({
   selector: 'app-master',
@@ -7,9 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MasterComponent implements OnInit {
 
-  constructor() { }
+  currentUserLogin;
+  constructor(private authService: AuthService) { }
 
   ngOnInit(): void {
+    this.currentUserLogin = this.authService.getUserLogin();
   }
 
 }

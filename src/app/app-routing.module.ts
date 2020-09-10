@@ -18,9 +18,7 @@ const routes: Routes = [
       {path: 'dashboard', component: DashboardComponent},
       {
         path: 'users',
-        children: [
-          {path: '', component: UserListComponent}
-        ]
+        loadChildren: () => import('./components/users/users.module').then(m => m.UsersModule)
       },
     ],
     canActivate: [IsAuthenGuard]

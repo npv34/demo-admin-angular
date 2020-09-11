@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {AuthService} from "../../services/auth.service";
 import {ActivatedRoute, Router} from "@angular/router";
+import {HttpResult} from "../../core/http-result";
 
 @Component({
   selector: 'app-login',
@@ -26,12 +27,15 @@ export class LoginComponent implements OnInit {
 
   login() {
     let data = this.loginForm.value;
-    if (this.authService.findUser(data)) {
-      console.log(22323)
-      this.router.navigate(['admin'])
-    } else {
-      console.log(2)
-     // this.router.navigate(['/login'])
-    }
+    this.authService.login(data).subscribe((result: HttpResult) => {
+      if (result.status == 'success') {
+        let userLogin = result.data.user.original;
+        localStorage.setItem('token', JSON.stringify(result.data.token));
+        localStorage.setItem('currentUserLogin', JSON.stringify(userLogin));
+        this.router.navigate(['admin'])
+      }else {
+        this.router.navigate(['login'])
+      }
+    });
   }
 }

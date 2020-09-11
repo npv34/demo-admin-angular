@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {AuthService} from "../../../services/auth.service";
+import {UserService} from "../../../services/user.service";
+import {HttpResult} from "../../../core/http-result";
 
 @Component({
   selector: 'app-user-list',
@@ -7,9 +10,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserListComponent implements OnInit {
 
-  constructor() { }
+  users = [];
+  constructor(private userService: UserService) { }
 
   ngOnInit(): void {
+    this.userService.getAll().subscribe((result: HttpResult) => {
+      if (result.status == 'success') {
+        console.log(result.data)
+        this.users = result.data;
+      }
+    })
   }
 
 }

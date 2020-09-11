@@ -8,6 +8,7 @@ import { MasterComponent } from './layout/master/master.component';
 import { NavbarComponent } from './layout/navbar/navbar.component';
 import { DashboardComponent } from './layout/dashboard/dashboard.component';
 import {ReactiveFormsModule} from "@angular/forms";
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import {ReactiveFormsModule} from "@angular/forms";
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

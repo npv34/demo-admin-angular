@@ -13,8 +13,8 @@ export class IsAuthenGuard implements CanActivate {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    let currentUserLogin = this.authService.getUserLogin();
-    if (!currentUserLogin) {
+
+    if (!this.authService.getToken()) {
       this.router.navigate(['login'])
     }
     return true;
